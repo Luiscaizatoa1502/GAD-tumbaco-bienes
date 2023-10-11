@@ -1,0 +1,70 @@
+<head>
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+</head>
+
+<!-- <div class="container menu">
+  <img src="https://tumbaco.gob.ec/images/LogoMini.png" alt="">
+</div> -->
+
+<nav class="navbar bg-body-primary menu">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">
+      <img src="https://tumbaco.gob.ec/images/LogoMini.png"
+      alt="Logo" width="120" height="60"
+      class="d-inline-block align-text-top">
+    </a>
+  </div>
+</nav>
+
+<body><br>
+  
+  <div class="sidebar">
+    <div class="logo__content">
+      <div class="logo">
+        <img style="width: 40px;" src="" alt="">
+        <div class="logo__name">
+          <!-- Contabilidad -->
+        </div>
+      </div>
+      <i class='bx bx-menu' id="btn"></i>
+    </div>
+    <ul class="nav__list">
+      <li>
+        <a routerLink="/user" data-bs-toggle="tooltip" data-bs-placement="right" title="Usuario">
+          <i class="bi bi-journal-richtext"></i>
+          <span class="links__name">Solicitud Bienes</span>
+        </a>
+
+      </li>
+      <li>
+        <a routerLink="/departamento" data-bs-toggle="tooltip" data-bs-placement="right" title="departamento">
+          <i class='bi bi-journal-check'></i>
+          <span class="links__name">Formulario Bienes</span>
+        </a>
+
+      </li>
+      <li>
+        <a routerLink="/departamento" data-bs-toggle="tooltip" data-bs-placement="right" title="departamento">
+          <i class='bi bi-journals'></i>
+          <span class="links__name">Inventario GAD</span>
+        </a>
+
+      </li>
+
+
+    </ul>
+    <div class="profile__content">
+      <div class="profile">
+        <div class="profile__details">
+          <img
+          src="../../../assets/logo.png"
+            alt="">
+        </div>
+        <a routerLink="/login">
+          <i class='bx bx-log-out text-light' id="log__out"></i>
+        </a>
+        
+      </div>
+    </div>
+  </div>
+</body> 

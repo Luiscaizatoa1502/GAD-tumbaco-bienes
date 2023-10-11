@@ -1,0 +1,220 @@
+
+<p-table class="table__content shadow-9 m-3 surface-card" #dt [value]="listadousuario" dataKey="id" [rows]="10" id="season-tble"
+[showCurrentPageReport]="true"  [paginator]="true" responsiveLayout="scroll"
+currentPageReportTemplate="Datos {first} a {last} de {totalRecords} registros"
+[rowHover]="true"
+[globalFilterFields]="['id','nombre','apellido','cedula','serie']"
+>
+
+<ng-template pTemplate="caption">
+  <div class="flex justify-content-between">
+    <span class="p-input-icon-left mb-2 md:mb-0">
+      <i class="pi pi-search"></i>
+      <input pInputText type="search" (input)="dt.filterGlobal(getEventValue($event),'contains')"
+        placeholder="Buscar" />
+    </span>
+    <button pButton pRipple label="Agregar" icon="pi pi-plus" class="p-button-success mr-2"  style="margin-left: 50px;" data-bs-toggle="modal" data-bs-target="#exampleModal"></button>
+  </div>
+</ng-template>
+
+<ng-template pTemplate="header">
+  <tr>
+    <th>ID<p-columnFilter type="text" field="id_usuarios" display="menu"></p-columnFilter></th>
+    <th>Nombre<p-columnFilter type="text" field="responsable_bien" display="menu"></p-columnFilter>
+    <th>Apellido<p-columnFilter type="text" field="nombre_bien" display="menu"></p-columnFilter></th>
+    <th>marca<p-columnFilter type="text" field="marca" display="menu"></p-columnFilter></th>
+    <th>serie<p-columnFilter type="text" field="serie" display="menu"></p-columnFilter></th>
+    <th>detalle<p-columnFilter type="text" field="detalle" display="menu"></p-columnFilter></th>
+    <th>Acciones</th>
+
+  </tr>
+  <!-- <tr>
+          <th><p-columnFilter type="text" field="nombreTarjeta"></p-columnFilter></th>
+          <th><p-columnFilter type="text" field="descTarjeta"></p-columnFilter></th>
+          <th><p-columnFilter type="text" field="stateTarjeta"></p-columnFilter></th>
+          <th><p-columnFilter type="text" field="dateTarjeta"></p-columnFilter></th>
+          <th><p-columnFilter type="text" field="idUsurTarjeta"></p-columnFilter></th>
+      </tr> -->
+</ng-template>
+
+
+<ng-template pTemplate="body" let-usuario>
+  <tr class="tablas">
+    <td>{{ usuario.id_usuarios}}</td>
+    <td>{{ usuario.responsable_bien }}</td>
+    <td>{{ usuario.nombre_bien }}</td>
+    <td>{{ usuario.marca }}</td>
+    <td>{{ usuario.serie }}</td>
+    <td>{{ usuario.detalle }}</td>
+    <td>{{ usuario.stock }}</td>
+    <td>{{ usuario.disponibilidad }}</td>
+    <td><button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning m-2"
+      style="background-color: rgb(196, 8, 8);"
+      (click)="eliminarUsuario(usuario.id_usuarios)"></button>
+        <button pButton pRipple icon="pi pi-pencil"   class="p-button-rounded p-button-warning m-2"
+        style="background-color: rgb(33, 162, 7);" (click)="editusuario(usuario)"  data-bs-toggle="modal" data-bs-target="#exampleModal2"></button>
+      </td>
+  </tr>
+</ng-template>
+
+<ng-template pTemplate="summary">
+  <div class="p-d-flex p-ai-center p-jc-between">
+    En total hay {{listadousuario ? listadousuario.length : 0 }} entradas.
+  </div>
+</ng-template>
+</p-table>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal-dialog">
+<div class="modal-content">
+  <div class="modal-header">
+    <h5 class="modal-title" id="exampleModalLabel">Datos Usuario</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="UsuarioForm.reset()"></button>
+  </div>
+  <div class="modal-body">
+    <form action="#" [formGroup]="UsuarioForm" (ngSubmit)="agregarUsuario(); UsuarioForm.reset()">
+      <div class="user-details">
+        <div class="input-box">
+          <span class="details">Responsable</span>
+          <input type="text" formControlName="responsable_bien" name="responsable_bien" placeholder="nombre usuario"
+            required>
+          <div class="text-danger"
+            *ngIf="UsuarioForm.get('responsable_bien')?.hasError('required') && UsuarioForm.get('responsable_bien')?.touched">
+            <span>Este campo es <strong>obligatorio</strong></span>
+          </div>
+        </div>
+        <div class="input-box">
+          <span class="details">Nombre:</span>
+          <input type="text" formControlName="nombre_bien" name="nombre_bien" placeholder="Apellido Usuario" required>
+          <div class="text-danger"
+            *ngIf="UsuarioForm.get('nombre_bien')?.hasError('required') && UsuarioForm.get('nombre_bien')?.touched">
+            <span>Este campo es <strong>obligatorio</strong></span>
+          </div>
+        </div>
+        <div class="input-box">
+          <span class="details">marca:</span>
+          <input type="text" formControlName="marca" name="marca" placeholder="marca" required>
+          <div class="text-danger"
+            *ngIf="UsuarioForm.get('marca')?.hasError('required') && UsuarioForm.get('marca')?.touched">
+            <span>Este campo es <strong>obligatorio</strong></span>
+          </div>
+        </div>
+      
+        <div class="input-box">
+          <span class="details">serie:</span>
+          <input type="text" formControlName="serie" name="serie" placeholder="Departamento" required>
+          <div class="text-danger"
+            *ngIf="UsuarioForm.get('serie')?.hasError('required') && UsuarioForm.get('serie')?.touched">
+            <span>Este campo es <strong>obligatorio</strong></span>
+          </div>
+        </div>
+          <div class="input-box">
+          <span class="details"> detalle:</span>
+          <input type="text" formControlName="detalle" name="detalle" placeholder="nr. detalle" required>
+          <div class="text-danger"
+            *ngIf="UsuarioForm.get('detalle')?.hasError('required') && UsuarioForm.get('detalle')?.touched">
+            <span>Este campo es <strong>obligatorio</strong></span>
+          </div>
+        </div>
+        <div class="input-box">
+          <span class="details">Stock:</span>
+          <input type="text" formControlName="stock" name="stock" placeholder="stock" required>
+          <div class="text-danger"
+            *ngIf="UsuarioForm.get('stock')?.hasError('required') && UsuarioForm.get('stock')?.touched">
+            <span>Este campo es <strong>obligatorio</strong></span>
+          </div>
+        </div>
+        <div class="input-box">
+          <span class="details">Disponibilidad:</span>
+          <input type="text" formControlName="disponibilidad" name="disponibilidad" placeholder="disponibilidad" required>
+          <div class="text-danger"
+            *ngIf="UsuarioForm.get('disponibilidad')?.hasError('required') && UsuarioForm.get('disponibilidad')?.touched">
+            <span>Este campo es <strong>obligatorio</strong></span>
+          </div>
+        </div>
+      
+    
+    
+        <div class="mb-3">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="UsuarioForm.reset()">Cerrar</button>
+          <p-toast></p-toast>
+          <button style="margin-left: 9px; background-color: rgb(33, 162, 7);" type="submit"
+            class="btn btn-secondary" data-bs-dismiss="modal" [disabled]="UsuarioForm.invalid" >Guardar</button>
+          
+        </div>
+      </div>
+    </form>
+</div>
+</div>
+</div>
+</div>
+
+
+<!--  modal 2 -->
+<div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal-dialog">
+<div class="modal-content">
+  <div class="modal-header">
+    <h5 class="modal-title" id="exampleModalLabel">Actualizar</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+    ></button>
+  </div>
+  <div class="modal-body">
+    <form action="#" id="miForm"  (ngSubmit)="updateUsuario()" [formGroup]="UsuarioForm">
+      <div class="user-details">
+        <div class="input-box">
+          <span class="details">Responsable</span>
+          <input type="text" value="{{selectUsuario.responsable_bien}}" id="responsable_bien" formControlName="responsable_bien" name="responsable_bien"
+            placeholder="nombre" required>
+        
+        </div>
+        <div class="input-box">
+          <span class="details">Nombre</span>
+          <input type="text" value="{{selectUsuario.nombre_bien}}" id="nombre_bien" formControlName="nombre_bien" name="nombre_bien"
+            placeholder="apellido" required>
+        
+        </div>
+        <div class="input-box">
+          <span class="details">serie</span>
+          <input type="text" value="{{selectUsuario.serie}}" id="serie" formControlName="serie" name="serie"
+            placeholder="serie" required>
+        </div>
+        <div class="input-box">
+          <span class="details">detalle</span>
+          <input type="text" value="{{selectUsuario.detalle}}" id="detalle" formControlName="detalle" name="detalle"
+            placeholder="detalle" required>
+        </div>
+        <div class="input-box">
+          <span class="details">marca:</span>
+          <input type="text" value="{{selectUsuario.marca}}" id="marca" formControlName="marca" name="marca"
+            placeholder="marca" required>
+
+        </div>
+        <div class="input-box">
+          <span class="details">stock:</span>
+          <input type="text" value="{{selectUsuario.stock}}" id="stock" formControlName="stock" name="stock"
+            placeholder="stock" required>
+
+        </div>
+        
+        <div class="mb-3">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+          >Cerrar</button>
+        <p-toast></p-toast>
+    
+          <button style="margin-left: 9px; background-color: rgb(33, 162, 7);" type="submit"
+            class="btn btn-secondary" data-bs-dismiss="modal" >Actualizar</button>
+        </div>
+      </div>
+    </form>
+    
+  </div>
+</div>
+</div>
+</div>
+    
+
+
