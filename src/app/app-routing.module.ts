@@ -8,6 +8,9 @@ import { DepartamentoComponent } from './main/components/departamento/departamen
 import { LoginComponent } from './main/components/login/login.component';
 import { LoginprincipalComponent } from './loginInicio/loginprincipal/loginprincipal.component';
 
+
+
+
 const routes: Routes = [
   { path: '', redirectTo: '/user', pathMatch: 'full' },
   { path: 'tarjeta', component: TarjetaComponent },
@@ -15,7 +18,11 @@ const routes: Routes = [
   {path:'user',component:UsuarioComponent},
   {path:'departamento',component: DepartamentoComponent},
   {path:'login',component: LoginComponent},
-  {path:'loginPrincipal',component: LoginprincipalComponent},
+
+ 
+
+  
+  /* {path:'loginPrincipal',component: LoginprincipalComponent}, */
   
 
 
